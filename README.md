@@ -19,7 +19,7 @@ The generated random number will be sent with a `200 OK` response as the value o
 > [!NOTE]
 > Examples of requests are formatted for readability. The original URL is provided.
 
-Formatted request (URL: `http://localhost:3000/randnum?upper=6`):
+Formatted request ([URL](http://localhost:3000/randnum?upper=6): `http://localhost:3000/randnum?upper=6`):
 ```javascript
 {
   upper: '6'
@@ -35,7 +35,7 @@ Response:
 
 
 ## Example #2 (400 Bad Request)
-Formatted request ([URL]: `http://localhost:3000/randnum?lower=0&upper=6`): 
+Formatted request ([URL](http://localhost:3000/randnum?lower=0&upper=6): `http://localhost:3000/randnum?lower=0&upper=6`): 
 ```javascript
 {
   lower: '0',
