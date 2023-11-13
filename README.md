@@ -1,5 +1,13 @@
 # Random Number Generation Microservice
 
+- [How to Request Data?](#how-to-request-data)
+- [Request Parameters](#request-parameters)
+- [How to Receive Data?](#how-to-receive-data)
+- [Example #1](#example-1-200-ok)
+- [Example #2](#example-2-400-bad-request)
+- [Example #3](#example-3-200-ok)
+- [UML Sequence Diagram](#uml-sequence-diagram)
+  
 ## How to _Request_ Data?
 1. Send an HTTP request using the GET method to the [localhost:3000/randnum](http://localhost:3000/randnum) endpoint.
 2. Set the `upper` query parameter value. This will be used to generate random integers from `1` to `upper`.
@@ -68,5 +76,6 @@ Response:
     "number": 12
 }
 ```
+
 ## UML Sequence Diagram
 ![UML Sequence Diagram](documents/cs361_uml_sequence_diagram.png)
