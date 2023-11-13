@@ -53,7 +53,7 @@ Response:
 
 
 ## Example #3 (200 OK)
-Formatted request (URL: `http://localhost:3000/randnum?lower=0&upper=6&min limit=0&max limit=10`):
+Formatted request (URL: `http://localhost:3000/randnum?lower=0&upper=6&min%20limit=0&max%20limit=10`):
 ```javascript
 {
    "lower":"0",
