@@ -101,7 +101,7 @@ app.get('/randnum', (req, res) => {
         {
             console.log(`Error raised: ${err.message}.`);
             return res.status(400).json({
-                error: `Missing param - the '${upper_key}' key was not found.`
+                error: `${err.message} - the '${upper_key}' key was not found.`
             })
         }
         else if(err.message === 'Out of range')
@@ -109,7 +109,7 @@ app.get('/randnum', (req, res) => {
             console.log(`Error raised: ${err.message}.`);
             console.log("min_limit:", min_limit, "max_limit:", max_limit, "lower:", lower);
             return res.status(400).json({
-                error: `Out of range - the '${lower_key}' and|or '${upper_key}' values must be in the closed range [${min_limit} - ${max_limit}].`
+                error: `${err.message} - the '${lower_key}' and|or '${upper_key}' values must be in the closed range [${min_limit} - ${max_limit}].`
             })
         }
         else if(err.message === 'Values error')
@@ -117,7 +117,7 @@ app.get('/randnum', (req, res) => {
             console.log(`Error raised: ${err.message}.`);
             console.log("min_limit:", min_limit, "max_limit:", max_limit, "lower:", lower);
             return res.status(400).json({
-                error: `Values error - the '${lower_key}' value must not be greater than the '${upper_key}' value.`
+                error: `${err.message} - the '${lower_key}' value must not be greater than the '${upper_key}' value.`
             })
         }
         else if(err.message === 'Limits error')
@@ -125,7 +125,7 @@ app.get('/randnum', (req, res) => {
             console.log(`Error raised: ${err.message}.`);
             console.log("min_limit:", min_limit, "max_limit:", max_limit, "lower:", lower);
             return res.status(400).json({
-                error: `Limits error - the '${min_limit_key}' value must not be greater than the '${max_limit_key}' value.`
+                error: `${err.message} - the '${min_limit_key}' value must not be greater than the '${max_limit_key}' value.`
             })
         }
         else if(err.message === `Invalid type of '${min_limit_key}'`)
