@@ -8,9 +8,9 @@
 ### Request Parameters
 Although the `upper` parameter is the only **required** part of the request, there are other optional parameters that could be useful.
 - `upper` - the largest generated value. 
-- `lower` (optional) - this is `1` by default and it represents the lowest generated value
-- `min_limit` (optional) - The minimum accepted value. `1` by default
-- `max_limit` (optional) - The maximum accepted value. `1000` by default
+- `lower` (optional) - this is `1` by default and it represents the lowest generated value.
+- `min_limit` (optional) - the minimum accepted value. `1` by default.
+- `max_limit` (optional) - the maximum accepted value. `1000` by default.
 
 ## How to _Receive_ Data?
 The generated random number will be sent with a `200 OK` response as the value of the `number` key in a JSON object. See the example below.
