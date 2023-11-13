@@ -2,7 +2,7 @@
 
 const express = require("express");
 const app = express();
-const PORT = 3001;
+const PORT = 3000;
 
 // All defined query params
 const lower_key = 'lower';
@@ -13,7 +13,7 @@ const max_limit_key = 'max limit';
 // Default values
 let lower = 1;          // The lowest generated value
 //  upper = *provided*     The largest generated value
-let min_limit = 1;      // The minimun accepted value 
+let min_limit = 1;      // The minimum accepted value 
 let max_limit = 1000;   // The maximum accepted value 
 
 
