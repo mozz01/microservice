@@ -68,3 +68,5 @@ Response:
     "number": 3
 }
 ```
+## UML Sequence Diagram
+![UML Sequence Diagram](documents/cs361_uml_sequence_diagram.png)
