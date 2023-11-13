@@ -1,7 +1,7 @@
 # Random Number Generation Microservice
 
 - [How to Request Data?](#how-to-request-data)
-- [Request Parameters](#request-parameters)
+  - [Request Parameters](#request-parameters)
 - [How to Receive Data?](#how-to-receive-data)
 - [Example #1](#example-1-200-ok)
 - [Example #2](#example-2-400-bad-request)
