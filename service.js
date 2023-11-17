@@ -10,16 +10,16 @@ const upper_key = 'upper';
 const min_limit_key = 'min limit';
 const max_limit_key = 'max limit';
 
-// Default values
-let lower = 1;          // The lowest generated value
-//  upper = *provided*     The largest generated value
-let min_limit = 1;      // The minimum accepted value 
-let max_limit = 1000;   // The maximum accepted value 
-
 
 app.get('/randnum', (req, res) => {
     let data = {}
     console.log('\nRequest received:\n', req.query);
+
+    // Default query params values
+    let lower = 1;          // The lowest generated value
+    //  upper = *provided*     The largest generated value
+    let min_limit = 1;      // The minimum accepted value 
+    let max_limit = 1000;   // The maximum accepted value
 
     try
     {
@@ -66,8 +66,10 @@ app.get('/randnum', (req, res) => {
             {
                 throw new Error(`Invalid type of '${lower_key}'`);
             }
-        }        
+        }
         
+
+
         // Range checks
         if( min_limit > max_limit )
         {
@@ -84,7 +86,7 @@ app.get('/randnum', (req, res) => {
         else
         {
             // Valid request... process and send response
-            let randnum = generate_random(upper);
+            let randnum = generate_random(lower, upper);
             console.log('Generated number:', randnum);
 
             data = 
@@ -107,7 +109,6 @@ app.get('/randnum', (req, res) => {
         else if(err.message === 'Out of range')
         {
             console.log(`Error raised: ${err.message}.`);
-            console.log("min_limit:", min_limit, "max_limit:", max_limit, "lower:", lower);
             return res.status(400).json({
                 error: `${err.message} - the '${lower_key}' and|or '${upper_key}' values must be in the closed range [${min_limit} - ${max_limit}].`
             })
@@ -115,7 +116,6 @@ app.get('/randnum', (req, res) => {
         else if(err.message === 'Values error')
         {
             console.log(`Error raised: ${err.message}.`);
-            console.log("min_limit:", min_limit, "max_limit:", max_limit, "lower:", lower);
             return res.status(400).json({
                 error: `${err.message} - the '${lower_key}' value must not be greater than the '${upper_key}' value.`
             })
@@ -123,7 +123,6 @@ app.get('/randnum', (req, res) => {
         else if(err.message === 'Limits error')
         {
             console.log(`Error raised: ${err.message}.`);
-            console.log("min_limit:", min_limit, "max_limit:", max_limit, "lower:", lower);
             return res.status(400).json({
                 error: `${err.message} - the '${min_limit_key}' value must not be greater than the '${max_limit_key}' value.`
             })
@@ -159,8 +158,6 @@ app.get('/randnum', (req, res) => {
         else
         {
             console.log('Error raised: Bad request.');
-            // Show/hide error details
-            // console.log(err);
             return res.status(400).json({
                 error: `Bad request.`
             })
@@ -169,9 +166,8 @@ app.get('/randnum', (req, res) => {
 })
 
 
-function generate_random(upper)
+function generate_random(lower, upper)
 {
-    console.log("min_limit:", min_limit, "max_limit:", max_limit, "lower:", lower, "upper:", upper);
     // Generate a random int from the closed range ['lower', 'upper']
     // which also should be in the closed range ['min_limit', 'max_limit'] 
     return Math.floor(Math.random() * (upper - lower + 1)) + lower;
