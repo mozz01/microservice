@@ -11,7 +11,7 @@ const min_limit_key = 'min limit';
 const max_limit_key = 'max limit';
 
 
-pp.use('/randnum', express.json());
+app.use('/randnum', express.json());
 
 
 app.post('/randnum', (req, res) => {
