@@ -4,18 +4,21 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// All defined query params
+// All defined data params
 const lower_key = 'lower';
 const upper_key = 'upper';
 const min_limit_key = 'min limit';
 const max_limit_key = 'max limit';
 
 
-app.get('/randnum', (req, res) => {
-    let data = {}
-    console.log('\nRequest received:\n', req.query);
+pp.use('/randnum', express.json());
 
-    // Default query params values
+
+app.post('/randnum', (req, res) => {
+    let data = {}
+    console.log('\nRequest received:\n', req.body);
+
+    // Default data params values
     let lower = 1;          // The lowest generated value
     //  upper = *provided*     The largest generated value
     let min_limit = 1;      // The minimum accepted value 
@@ -23,13 +26,18 @@ app.get('/randnum', (req, res) => {
 
     try
     {
+        if(req.headers["content-type"] !== "application/json")
+        {
+            throw new Error('Invalid data type', { cause: `received 'content-type' as '${req.headers["content-type"]}', expected 'application/json'` });
+        }
+
         // Required parameters
-        if( !(upper_key in req.query) )
+        if( !(upper_key in req.body) )
         {
             throw new Error('Missing required parameter');
         }
         
-        const upper = Number(req.query[upper_key]);
+        const upper = Number(req.body[upper_key]);
         
         if( !isInt(upper) )
         {
@@ -38,9 +46,9 @@ app.get('/randnum', (req, res) => {
 
 
         // Optional parameters and input checks
-        if( (min_limit_key in req.query) )
+        if( (min_limit_key in req.body) )
         {
-            min_limit = Number(req.query[min_limit_key]);
+            min_limit = Number(req.body[min_limit_key]);
             
             if( !isInt(min_limit) )
             {
@@ -48,9 +56,9 @@ app.get('/randnum', (req, res) => {
             }
         }
 
-        if( (max_limit_key in req.query) )
+        if( (max_limit_key in req.body) )
         {
-            max_limit = Number(req.query[max_limit_key]);
+            max_limit = Number(req.body[max_limit_key]);
 
             if( !isInt(max_limit) )
             {
@@ -58,9 +66,9 @@ app.get('/randnum', (req, res) => {
             }
         }
 
-        if( (lower_key in req.query) )
+        if( (lower_key in req.body) )
         {
-            lower = Number(req.query[lower_key]);
+            lower = Number(req.body[lower_key]);
 
             if( !isInt(lower) )
             {
@@ -99,7 +107,14 @@ app.get('/randnum', (req, res) => {
     }
     catch(err)
     {
-        if(err.message === 'Missing required parameter')
+        if(err.message === 'Invalid data type')
+        {
+            console.log(`Error raised: ${err.message}.`);
+            return res.status(400).json({
+                error: `${err.message} - ${err.cause}.`
+            })
+        }
+        else if(err.message === 'Missing required parameter')
         {
             console.log(`Error raised: ${err.message}.`);
             return res.status(400).json({
@@ -131,28 +146,28 @@ app.get('/randnum', (req, res) => {
         {
             console.log(`Error raised: ${err.message}.`);
             return res.status(400).json({
-                error: `${err.message} - query value must be of type integer.`
+                error: `${err.message} - parameter value must be of type integer.`
             })
         }
         else if(err.message === `Invalid type of '${max_limit_key}'`)
         {
             console.log(`Error raised: ${err.message}.`);
             return res.status(400).json({
-                error: `${err.message} - query value must be of type integer.`
+                error: `${err.message} - parameter value must be of type integer.`
             })
         }
         else if(err.message === `Invalid type of '${lower_key}'`)
         {
             console.log(`Error raised: ${err.message}.`);
             return res.status(400).json({
-                error: `${err.message} - query value must be of type integer.`
+                error: `${err.message} - parameter value must be of type integer.`
             })
         }
         else if(err.message === `Invalid type of '${upper_key}'`)
         {
             console.log(`Error raised: ${err.message}.`);
             return res.status(400).json({
-                error: `${err.message} - query value must be of type integer.`
+                error: `${err.message} - parameter value must be of type integer.`
             })
         }
         else
