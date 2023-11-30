@@ -9,7 +9,7 @@
 - [UML Sequence Diagram](#uml-sequence-diagram)
   
 ## How to _Request_ Data?
-1. Send an HTTP request using the GET method to the [localhost:3000/randnum](http://localhost:3000/randnum) endpoint.
+1. Send an HTTP request using the POST method to the [localhost:3000/randnum](http://localhost:3000/randnum) endpoint.
 2. Set the `upper` query parameter value. This will be used to generate random integers from `1` to `upper`.
 3. Receive the random number.
 
@@ -27,7 +27,7 @@ The generated random number will be sent with a `200 OK` response as the value o
 > [!NOTE]
 > Examples of requests are formatted for readability. The original URL is provided.
 
-Formatted request ([URL](http://localhost:3000/randnum?upper=6): `http://localhost:3000/randnum?upper=6`):
+Formatted request:
 ```javascript
 {
   upper: '6'
@@ -43,7 +43,7 @@ Response:
 
 
 ## Example #2 (400 Bad Request)
-Formatted request ([URL](http://localhost:3000/randnum?lower=0&upper=6): `http://localhost:3000/randnum?lower=0&upper=6`): 
+Formatted request: 
 ```javascript
 {
   lower: '0',
@@ -61,7 +61,7 @@ Response:
 
 
 ## Example #3 (200 OK)
-Formatted request ([URL](http://localhost:3000/randnum?lower=0&upper=6&min%20limit=0&max%20limit=10): `http://localhost:3000/randnum?lower=0&upper=6&min%20limit=0&max%20limit=10`):
+Formatted request:
 ```javascript
 {
    "lower":"10",
