@@ -10,7 +10,7 @@
   
 ## How to _Request_ Data?
 1. Send an HTTP request using the POST method to the [localhost:3000/randnum](http://localhost:3000/randnum) endpoint.
-2. Set the `upper` query parameter value. This will be used to generate random integers from `1` to `upper`.
+2. Set the `upper` data parameter value. This will be used to generate random integers from `1` to `upper`.
 3. Receive the random number.
 
 ### Request Parameters
