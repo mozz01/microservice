@@ -10,6 +10,14 @@ const upper_key = 'upper';
 const min_limit_key = 'min limit';
 const max_limit_key = 'max limit';
 
+// CORS middleware
+app.use("/randnum", (req, res, next) => {
+    res.set("Access-Control-Allow-Headers", "*");
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Methods", "POST");
+    next();
+  });
+
 
 app.use('/randnum', express.json());
 
